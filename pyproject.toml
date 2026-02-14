@@ -1,0 +1,32 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extergram"
+version = "0.8.0"
+authors = [
+    { name="WinFun15", email="tibipocoxzsa@gmail.com" },
+]
+description = "A simple and convenient library for creating Telegram bots."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "httpx>=0.23.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/AAVTIBI1/extergram"
+"Bug Tracker" = "https://github.com/AAVTIBI1/extergram/issues"
+
+[tool.setuptools]
+packages = ["extergram", "extergram.ext"]

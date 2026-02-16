@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "extergram"
-version = "0.8.0"
+version = "0.8.1"
 authors = [
     { name="WinFun15", email="tibipocoxzsa@gmail.com" },
 ]
@@ -25,8 +25,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/AAVTIBI1/extergram"
-"Bug Tracker" = "https://github.com/AAVTIBI1/extergram/issues"
+Homepage = "https://github.com/TIBI624/extergram"
+"Bug Tracker" = "https://github.com/TIBI624/extergram/issues"
 
 [tool.setuptools]
 packages = ["extergram", "extergram.ext"]

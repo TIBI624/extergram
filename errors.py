@@ -43,10 +43,10 @@ class EntityTooLargeError(APIError):
     """Raised for 413 Request Entity Too Large errors."""
     pass
 
-class BadGatewayError(APIError):
-    """Raised for 502 Bad Gateway errors."""
-    pass
-
 class InternalServerError(APIError):
     """Raised for 500 Internal Server Error."""
+    pass
+
+class BadGatewayError(APIError):
+    """Raised for 502 Bad Gateway errors."""
     pass

@@ -1,4 +1,3 @@
-
 # extergram/fsm.py
 
 from __future__ import annotations
@@ -107,7 +106,7 @@ class FSMContext:
         await self._storage.clear(self._key)
 
 
-# Импортируем BaseHandler здесь – после определения классов, чтобы избежать циклов
+# Import here to avoid circular imports
 from .ext.base import BaseHandler
 
 class StateHandler(BaseHandler):
@@ -119,9 +118,8 @@ class StateHandler(BaseHandler):
     def __init__(self, state: str, handler: BaseHandler):
         """
         :param state: The required state (string).
-        :param handler: Another handler instance (e.g., MessageHandler, CommandHandler, etc.)
+        :param handler: Another handler instance (e.g., MessageHandler, CommandHandler)
         """
-        # Сохраняем внутренний обработчик и используем его callback как свой собственный
         self.inner_handler = handler
         super().__init__(callback=handler.callback)
         self.state = state
@@ -134,18 +132,20 @@ class StateHandler(BaseHandler):
             self.inner_handler.set_bot(bot)
 
     async def async_check_update(self, update: Update, bot: 'Bot') -> bool:
-        """Async check: matches inner handler and user is in the required state."""
-        # Проверяем, подходит ли внутренний обработчик
+        """
+        Async check: matches inner handler and user is in the required state.
+        """
+        # Check if inner handler matches
         inner_matches = False
         if hasattr(self.inner_handler, 'async_check_update') and callable(self.inner_handler.async_check_update):
             inner_matches = await self.inner_handler.async_check_update(update, bot)
-        else:
+        elif hasattr(self.inner_handler, 'check_update') and callable(self.inner_handler.check_update):
             inner_matches = self.inner_handler.check_update(update)
 
         if not inner_matches:
             return False
 
-        # Определяем ключ FSM для этого пользователя/чата
+        # Determine FSM key for this user/chat
         if update.message:
             chat_id = update.message.chat.id
             user_id = update.message.from_user.id if update.message.from_user else None
@@ -163,5 +163,5 @@ class StateHandler(BaseHandler):
         return current_state == self.state
 
     def check_update(self, update: Update) -> bool:
-        """Fallback sync check – не используется, но требуется для абстрактного метода."""
+        """Fallback sync check – not used, but required by abstract base class."""
         raise NotImplementedError("StateHandler requires async_check_update")

@@ -9,7 +9,7 @@ from . import ext
 from . import errors
 from .fsm import MemoryFSMStorage, FSMContext, StateHandler
 
-__version__ = "0.8.0"
+__version__ = "0.8.1"
 __author__ = "WinFun15"
 __email__ = "tibipocoxzsa@gmail.com"
 

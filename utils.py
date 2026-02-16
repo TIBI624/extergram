@@ -17,18 +17,22 @@ class Markdown:
     This version provides automatic escaping for safety.
     """
     def __init__(self, text=""):
-        # The initial text is now also safely escaped to prevent errors.
-        self.text = escape_markdown_v2(str(text))
+        self._parts = [escape_markdown_v2(str(text))]
+
+    def text(self, text: str) -> 'Markdown':
+        """Appends plain text, automatically escaping special characters."""
+        self._parts.append(escape_markdown_v2(str(text)))
+        return self
 
     def bold(self, text: str) -> 'Markdown':
         """Appends bold text, automatically escaping special characters in the content."""
-        self.text += f"*{escape_markdown_v2(str(text))}*"
+        self._parts.append(f"*{escape_markdown_v2(str(text))}*")
         return self
 
     def italic(self, text: str) -> 'Markdown':
         """Appends italic text, automatically escaping special characters in the content."""
-        self.text += f"_{escape_markdown_v2(str(text))}_"
+        self._parts.append(f"_{escape_markdown_v2(str(text))}_")
         return self
     
     def __str__(self):
-        return self.text
+        return ''.join(self._parts)

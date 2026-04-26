@@ -15,7 +15,7 @@ class Docs:
         Returns a message with a link to the online documentation.
         """
         return (
-            "📚 **Extergram Documentation**\n\n"
+            "Extergram Documentation\n\n"
             "The full documentation is available online at:\n"
             f"{Docs.GITHUB_URL}\n\n"
             "You can also view the README directly on GitHub."
